@@ -1,2 +1,13 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<h1>Welcome to Never-Board</h1>
+
+<h2>All Products</h2>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <h3><%= link_to product.title, product_path(product) %></h3>
+      <h4>Price: $<%= '%.2f' % (product.price_cents / 100.0) %></h4>
+      <p><%= truncate(product.description, length: 100) %></p>
+    </li>
+  <% end %>
+</ul>
