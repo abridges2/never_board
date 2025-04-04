@@ -1,3 +1,6 @@
+# Waiting on clarification on the 10 products invented rule for the project.
+# If it needs to be changed I will invent the board games.
+
 OrderItem.destroy_all
 Order.destroy_all
 Product.destroy_all
@@ -96,3 +99,8 @@ Product.create!([
     image_url: "trouble_example"
   }
 ])
+
+AdminUser.find_or_create_by!(email: "admin@example.com") do |admin|
+  admin.password = "password"
+  admin.password_confirmation = "password"
+end
