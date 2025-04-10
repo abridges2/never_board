@@ -2,3 +2,6 @@
 
 <p>Price: $<%= '%.2f' % (@product.price_cents / 100.0) %></p>
 <p><%= @product.description %></p>
+<% if @product.image.attached? %>
+  <%= image_tag url_for(@product.image.variant(resize_to_limit: [700, 700])), alt: @product.title %>
+<% end %>

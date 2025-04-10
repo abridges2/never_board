@@ -1,6 +1,3 @@
-# Waiting on clarification on the 10 products invented rule for the project.
-# If it needs to be changed I will invent the board games.
-
 OrderItem.destroy_all
 Order.destroy_all
 Product.destroy_all
@@ -23,7 +20,6 @@ family = Category.create!(name: "Family")
 card_game = Category.create!(name: "Card Game")
 role_playing_game = Category.create!(name: "Role-Playing Game")
 
-# price_cents is an integer value and will be changed to float values later on by dividing by 100.
 puts "Seeding Products"
 Product.create!([
   {
