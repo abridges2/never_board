@@ -1,0 +1,18 @@
+// Your custom styles
+.custom-navbar {
+  background-color: #404040;
+  color: white;
+}
+
+.custom-navbar * {
+  color: white !important;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: rgb(34,193,195);
+  background: linear-gradient(354deg, rgba(34,193,195,1) 0%, rgba(14,11,3,1) 100%);
+}
