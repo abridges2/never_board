@@ -5,8 +5,8 @@
 <ul>
   <% @products.each do |product| %>
     <li>
-      <% if product.image.attached? %>
-        <%= image_tag url_for(product.image.variant(resize_to_limit: [300, 300])), alt: product.title %>
+      <% if product.image.present? %>
+        <%= image_tag product.image %>
       <% end %>
       <h3><%= link_to product.title, product_path(product) %></h3>
       <h4>Price: $<%= '%.2f' % (product.price_cents / 100.0) %></h4>

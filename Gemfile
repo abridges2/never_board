@@ -25,7 +25,7 @@ gem "activeadmin"
 gem "sass-rails"
 
 # Admin Images
-gem "image_processing"
+gem "image_processing", "~> 1.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
