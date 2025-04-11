@@ -25,10 +25,11 @@
 
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg custom-navbar navbar-light py-4 border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-lg bg-dark py-4 border-bottom shadow-sm">
       <div class="container-fluid">
         <!-- Navbar brand -->
-        <a class="navbar-brand fw-bold" href="<%= root_path %>">Never-Board</a>
+        <a href="https://fontmeme.com/resize-images/"><img src="https://fontmeme.com/permalink/250411/babd8beff0b750d37e6ab75168aec56e.png" alt="resize-images" border="0"></a>
+
 
         <!-- Toggle for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -41,24 +42,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+            <li class="nav-item ">
+              <a class="nav-link fs-4" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link fs-4" href="#">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Products</a>
+              <a class="nav-link fs-4" href="#">Products</a>
             </li>
           </ul>
 
           <!-- Cart and Search (right side) -->
-          <form class="d-flex align-items-center">
-            <a href="#" class="btn btn-outline-light me-3">
+          <div class="d-flex align-items-center gap-0">
+
+            <a href="#" class="btn btn-outline-light me-3 cart-btn">
               <i class="bi bi-cart3"></i>
             </a>
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-          </form>
+
+            <%= form_with(url: search_products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
+              <%= text_field_tag(:query, nil, class: "form-control rounded", placeholder: "Search product") %>
+              <select class="form-select" name="category_id" id="form-select">
+                <option value="">All categories</option>
+                <% Category.all.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+                <% end %>
+              </select>
+              <% submit_tag("Search") %>
+            <% end %>
+          </div>
         </div>
       </div>
     </nav>

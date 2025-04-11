@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "products/index"
   get "products/show"
+  get "search", to: "products#search", as: "search_products"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

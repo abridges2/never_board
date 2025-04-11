@@ -1,7 +1,6 @@
 // Your custom styles
 .custom-navbar {
-  background-color: #404040;
-  color: white;
+
 }
 
 .custom-navbar * {
@@ -15,4 +14,31 @@ html, body {
   padding: 0;
   background: rgb(34,193,195);
   background: linear-gradient(354deg, rgba(34,193,195,1) 0%, rgba(14,11,3,1) 100%);
+  background-attachment: fixed;
 }
+
+nav .navbar-nav li a {
+  color: white !important;
+  margin-left: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease; /* smooth transition */
+}
+
+nav .navbar-nav li a:hover {
+  color: lightseagreen !important;
+  text-decoration: underline;
+}
+
+.cart-button {
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.cart-btn:hover {
+  background-color: lightseagreen !important;
+  color: #000;
+  border-color: black;
+}
+
+
