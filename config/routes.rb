@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  get "categories/show"
   get "products/index", to: "products#index", as: "products"
   get "products/show"
   get "search", to: "products#search", as: "search_products"
   get "about", to: "products#about", as: "about"
+  # get "categories", to: "categories#show", as: "categories"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
