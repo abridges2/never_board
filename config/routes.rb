@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "categories/show"
+  get "categories/:id", to: "categories#show", as: "category"
   get "products/index", to: "products#index", as: "products"
   get "products/show"
   get "search", to: "products#search", as: "search_products"

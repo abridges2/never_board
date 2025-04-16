@@ -54,8 +54,29 @@
             <li class="nav-item">
               <%= link_to "Products", products_path, class: "nav-link fs-4"%>
             </li>
-            <li class="nav-item">
-              <%= link_to "Categories", categories_path, class: "nav-link fs-4"%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fs-4" href="#" id="categoryDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu bg-dark" aria-labelledby="categoryDropdown">
+                <% Category.all.each do |category| %>
+                  <li>
+                    <%= link_to category.name, category_path(category), class: "dropdown-item" %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+
+              <%# <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <aclass="dropdown-item" href="#">Another</a>
+                <div class="dropdown-divider"></div>
+                <aclass="dropdown-item" href="#">Something else</a> %>
+              </div>
             </li>
           </ul>
 

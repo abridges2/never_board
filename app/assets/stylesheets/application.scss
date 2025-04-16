@@ -1,7 +1,3 @@
-.custom-navbar * {
-  color: white !important;
-}
-
 html, body {
   height: 100%;
   margin: 0;
@@ -20,7 +16,7 @@ nav .navbar-nav li a {
   transition: all 0.3s ease;
 }
 
-nav .navbar-nav li a:hover {
+nav .navbar-nav > li > a.nav-link:hover {
   color: lightseagreen !important;
   text-decoration: underline;
 }
@@ -29,7 +25,7 @@ nav .navbar-nav li a:hover {
   transition: color 0.3s, background-color 0.3s, border-color 0.3s;
 }
 
-.cart-btn:hover {
+a.cart-btn:hover {
   background-color: lightseagreen !important;
   color: #000;
   border-color: black;
@@ -53,5 +49,24 @@ nav .navbar-nav li a:hover {
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   margin-bottom: 2rem;
+}
+
+
+.dropdown-menu {
+  border: none;
+  padding: 0.5rem 0;
+  min-width: 10rem;
+}
+
+.dropdown-item {
+  color: white !important;
+  padding: 0.25rem 1rem;
+  display: inline-block;
+
+  &:hover {
+    background-color: transparent !important;
+    color: lightseagreen !important;
+    text-decoration: underline;
+  }
 }
 
