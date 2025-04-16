@@ -1,0 +1,24 @@
+<div class="container py-5">
+ <div class="homepage-section text-center">
+    <h1 class="display-4">Welcome to Never-Board</h1>
+    <p class="lead">Your go-to store for the best tabletop games and accessories.</p>
+    <%= link_to "Browse Products", products_path, class: "btn btn-light btn-lg cart-button cart-btn"%>
+
+    <h2 class="display-4 mt-3">Featured Products</h2>
+    <p class="lead">Some games we think you'll love!</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+      <% @random_products.each do |product| %>
+        <%= render partial: "product_card", locals: { product: product } %>
+      <% end %>
+    </div>
+
+    <h2 class="display-4 mt-3">About Never-Board</h2>
+    <p class="lead">
+      At Never-Board, we're passionate about connecting people through the joy of tabletop gaming. Explore our wide selection of board games, card games,
+      and accessories that cater to all ages and interests. Whether you're a seasoned gamer or just starting out, we have something for everyone.
+      <%= link_to "Read more...", about_path, class: "text-white cart-button cart-btn"%>
+    </p>
+
+
+  </div>
+</div>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get "products/index"
+  get "products/index", to: "products#index", as: "products"
   get "products/show"
   get "search", to: "products#search", as: "search_products"
+  get "about", to: "products#about", as: "about"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,6 +16,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "products#index"
+  root "products#home"
   resources :products, only: [ :index, :show ]
 end
