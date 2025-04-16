@@ -1,6 +1,6 @@
 <div class="container bg-dark p-5 rounded shadow-sm mt-5">
  <div class="row align-items-center justify-content-between mb-3">
-  <div class="col">
+  <div class="col-auto">
     <h2 class="text-light mb-4 display-4">
       <% if @query.present? || @category_id.present? %>
         Search Results
@@ -10,6 +10,10 @@
         All Products
       <% end %>
     </h2>
+  </div>
+
+  <div class="col-auto">
+    <%= paginate @products %>
   </div>
 
   <div class="col-auto">
@@ -23,6 +27,11 @@
       </select>
     <% end %>
   </div>
+
+
+
+
+
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <%= render partial: "product_card", collection: @products, as: :product %>
