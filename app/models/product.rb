@@ -14,4 +14,15 @@ class Product < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     %w[title description price_cents created_at updated_at image_url]
   end
+
+  # This method is used to determine whether the product is on sale or not.
+  # Returns the sale price or the regular price depending on if the
+  # product is on sale.
+  def on_sale_price
+    if on_sale && sale_price_cents.present?
+      sale_price_cents
+    else
+      price_cents
+    end
+  end
 end
