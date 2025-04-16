@@ -1,5 +1,3 @@
-
-
 <div class="container bg-dark p-5 rounded shadow-sm mt-5">
  <div class="row align-items-center justify-content-between mb-3">
   <div class="col">
@@ -16,6 +14,7 @@
 
   <div class="col-auto">
     <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
+      <label for="form-select" class="text-light me-2">Filters:</label>
       <select class="form-select" name="filter" id="form-select" onchange="this.form.submit();">
         <option value="">None</option>
         <option value="on_sale" <%= "selected" if @filter == "on_sale" %>>On Sale</option>
