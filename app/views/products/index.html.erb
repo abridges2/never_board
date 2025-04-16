@@ -2,56 +2,16 @@
 
 <% if @query.present? || @category_id.present? %>
   <div class="container bg-dark p-5 rounded shadow-sm">
-    <h2 class="text-light mb-4">Search Results</h2>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <% @products.each do |product| %>
-        <div class="col">
-          <div class="card border border-primary rounded-4 shadow-sm h-100" style="background-color: #e0f0ff;">
-            <% if product.image.attached? %>
-              <%= image_tag url_for(product.image), class: "card-img-top rounded-top img-fluid", alt: product.title, style: "max-height: 200px; object-fit: cover;" %>
-            <% end %>
-
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= link_to product.title, product_path(product), class: "stretched-link text-decoration-none text-dark" %>
-              </h5>
-              <p class="card-text"><%= truncate(product.description, length: 100) %></p>
-            </div>
-
-            <div class="card-footer d-flex justify-content-between align-items-center border-top">
-              <span class="fw-bold text-primary">$<%= '%.2f' % (product.price_cents / 100.0) %></span>
-              <%= link_to "View", product_path(product), class: "btn btn-primary btn-sm" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
+  <h2 class="text-light mb-4">Search Results</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <%= render partial: "product_card", collection: @products, as: :product %>
   </div>
+</div>
 <% else %>
   <div class="container bg-dark p-5 rounded shadow-sm">
     <h2 class="text-light mb-4">All Products</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <% @products.each do |product| %>
-        <div class="col">
-          <div class="card border border-primary rounded-4 shadow-sm h-100" style="background-color: #e0f0ff;">
-            <% if product.image.attached? %>
-              <%= image_tag url_for(product.image), class: "card-img-top rounded-top img-fluid", alt: product.title, style: "max-height: 200px; object-fit: cover;" %>
-            <% end %>
-
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= link_to product.title, product_path(product), class: "stretched-link text-decoration-none text-dark" %>
-              </h5>
-              <p class="card-text"><%= truncate(product.description, length: 100) %></p>
-            </div>
-
-            <div class="card-footer d-flex justify-content-between align-items-center border-top">
-              <span class="fw-bold text-primary">$<%= '%.2f' % (product.price_cents / 100.0) %></span>
-              <%= link_to "View", product_path(product), class: "btn btn-primary btn-sm" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: "product_card", collection: @products, as: :product %>
     </div>
   </div>
 <% end %>
