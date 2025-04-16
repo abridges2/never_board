@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   def search
     @query = params[:query]
     @category_id = params[:category_id]
-    @products = Product.all
+    @products = Product.all.page(params[:page]).per(9)
 
     if params[:query].present?
       @products = @products.where("title LIKE ? OR description LIKE ?", "%#{@query}%", "%#{@query}%")
