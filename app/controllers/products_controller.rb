@@ -16,6 +16,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+
+    session[:viewed_products] ||= {}
+    session[:viewed_products][@product.id.to_s] ||= 0
+    session[:viewed_products][@product.id.to_s] += 1
+
+    flash.now[:notice] = "You have viewed this product #{session[:viewed_products][@product.id.to_s]} times."
   end
 
   def search

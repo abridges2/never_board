@@ -8,6 +8,10 @@
         </div>
       <% end %>
 
+      <% if flash[:notice] %>
+        <%= flash[:notice] %>
+      <% end %>
+
       <div class="col-md-6 d-flex flex-column justify-content-center p-4">
         <h1 class="card-title display-5 fw-bold"><%= @product.title %></h1>
         <p class="fs-4 text-success mb-3">Price: $<%= '%.2f' % (@product.price_cents / 100.0) %></p>
