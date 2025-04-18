@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "cart/create"
   get "cart/destroy"
   resources :cart, only: [ :create, :destroy ]
