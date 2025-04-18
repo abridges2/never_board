@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "cart/create"
+  get "cart/destroy"
+  resources :cart, only: [ :create, :destroy ]
   get "categories/:id", to: "categories#show", as: "category"
   get "products/index", to: "products#index", as: "products"
   get "products/show"
