@@ -1,7 +1,8 @@
 class CartController < ApplicationController
-  def create
-  end
+  # def add
+  #   session[:cart] = {}
+  # end
 
-  def destroy
-  end
+  # def remove
+  # end
 end
