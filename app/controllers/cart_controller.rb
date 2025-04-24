@@ -4,18 +4,19 @@ class CartController < ApplicationController
     product_id = @product.id.to_s
     if session[:cart][product_id]
       session[:cart][product_id] += 1
-      flash[:notice] = "#{@product.name} quantity updated in cart"
+      flash[:notice] = "#{@product.title} quantity updated in cart"
     else
       session[:cart][product_id] = 1
-      flash[:notice] = "#{@product.name} added to cart"
+      flash[:notice] = "#{@product.title} added to cart"
     end
+    redirect_to product_path(@product)
   end
 
   def destroy
     product_id = @product.id.to_s
     if session[:cart][product_id]
       session[:cart].delete(product_id)
-      flash[:notice] = "#{@product.name} removed from cart"
+      flash[:notice] = "#{@product.title} removed from cart"
     else
       flash[:alert] = "Product not found in your cart"
     end
