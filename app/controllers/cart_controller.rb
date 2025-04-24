@@ -20,9 +20,26 @@ class CartController < ApplicationController
     else
       flash[:alert] = "Product not found in your cart"
     end
+    redirect_to cart_index_path
+  end
+
+  def index
+    @cart = session[:cart]
+    @cart_items = []
+    @cart.each do |product_id, quantity|
+      product = Product.find(product_id)
+      @cart_items << {
+        id: product.id.to_s,
+        title: product.title,
+        quantity: quantity,
+        description: product.description,
+        image: product.image,
+        price: product.price_cents
+      }
+    end
   end
 
   def get_product
-    @product = Product.find(params[:product_id])
+    @product = Product.find(params[:product_id] || params[:id])
   end
 end

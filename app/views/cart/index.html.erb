@@ -1,0 +1,25 @@
+<div class="container bg-dark p-5 rounded shadow-sm mt-5 text-light">
+  <div class="row">
+    <div class="col">
+      <div class="card bg-dark text-light">
+        <% @cart_items.each do |item| %>
+        <% if item[:image].attached? %>
+            <%= image_tag item[:image], class: "img-fluid", style: "max-height: 150px;" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item[:title] %></h5>
+            <p class="card-text">Price per unit: $<%= item[:price] / 100.00 %></p>
+            <p class="card-text">Quantity: <%= item[:quantity] %></p>
+            <%= button_to "Remove from Cart", cart_path(item[:id]), method: :delete, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col text-center">
+      <h1>
+        Ready to checkout <%= current_user.first_name%>?
+      </h1>
+      <p class="lead">Please remember all purchases are final. We're happy you decided to give us your money! Please come back and give us more anytime.</p>
+    </div>
+  </div>
+</div>
