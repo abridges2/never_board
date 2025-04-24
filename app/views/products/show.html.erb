@@ -14,9 +14,7 @@
         <p class="card-text"><%= @product.description %></p>
 
         <a href="#" class="btn btn-primary mt-4 w-50">Add to Cart</a>
-
-        <%# Wilson cart implementation %>
-
+        <% button_to "Add to cart", cart_index_path(product_id: @product.id), method: :post, class "btn btn-primary mt-4 w-50" %>
       </div>
 
     </div>

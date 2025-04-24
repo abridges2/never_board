@@ -81,7 +81,13 @@
           </ul>
 
           <!-- Cart and Search (right side) -->
-          <div class="d-flex align-items-center gap-0">
+          <div class="d-flex align-items-center gap-3">
+            <% if user_signed_in? %>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm me-3 cart-btn"%>
+            <% else %>
+              <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-light me-3 cart-btn"%>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light btn-sm me-3" %>
+            <% end %>
 
             <a href="#" class="btn btn-outline-light me-3 cart-btn">
               <i class="bi bi-cart3"></i>
