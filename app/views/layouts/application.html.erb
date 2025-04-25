@@ -89,9 +89,9 @@
               <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light btn-sm me-3" %>
             <% end %>
 
-            <a href="#" class="btn btn-outline-light me-3 cart-btn">
+            <%= link_to cart_index_path, class: "btn btn-outline-light me-3 cart-btn" do %>
               <i class="bi bi-cart3"></i>
-            </a>
+            <% end %>
 
             <%= form_with(url: search_products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
               <%= text_field_tag(:query, nil, class: "form-control rounded", placeholder: "Search product") %>
@@ -107,6 +107,7 @@
         </div>
       </div>
     </nav>
+    <!-- Navbar -->
 
 
     <p class="notice"><%= notice %></p>

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
   get "cart/create"
   get "cart/destroy"
-  resources :cart, only: [ :create, :destroy ]
+  resources :cart, only: [ :create, :destroy, :index ]
   get "categories/:id", to: "categories#show", as: "category"
   get "products/index", to: "products#index", as: "products"
   get "products/show"
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
   get "about", to: "products#about", as: "about"
   # get "categories", to: "categories#show", as: "categories"
   devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :users
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
