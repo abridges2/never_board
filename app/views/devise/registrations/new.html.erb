@@ -13,6 +13,16 @@
     <%= f.text_field :last_name %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :address %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :province_id, "Province" %><br />
+    <%= f.collection_select :province_id, Province.all, :id, :name, prompt: "Select a Province" %>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
