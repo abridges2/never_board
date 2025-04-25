@@ -13,7 +13,19 @@
         <p class="fs-4 text-success mb-3">Price: $<%= '%.2f' % (@product.price_cents / 100.0) %></p>
         <p class="card-text"><%= @product.description %></p>
 
-        <%= button_to "Add to cart", cart_index_path(product_id: @product.id), method: :post, class: "btn btn-primary mt-4 w-50" %>
+
+        <%= form_with url: cart_index_path, method: :post, local: true do %>
+          <div class="mb-3">
+            <%= label_tag :quantity, "Quantity", class: "form-label" %>
+            <%= number_field_tag :quantity, 1, in: 1..99, class: "form-control" %>
+            <%= hidden_field_tag :product_id, @product.id %>
+            <%= submit_tag "Add to Cart", class: "btn btn-primary mt-2" %>
+          </div>
+        <% end %>
+
+
+
+        <%#= button_to "Add to cart", cart_index_path(product_id: @product.id), method: :post, class: "btn btn-primary mt-4 w-50" %>
         <%= render 'shared/flash' %>
       </div>
 

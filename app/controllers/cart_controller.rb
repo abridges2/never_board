@@ -2,15 +2,19 @@ class CartController < ApplicationController
   before_action :get_product, only: [ :create, :destroy ]
   def create
     product_id = @product.id.to_s
-    if session[:cart][product_id]
-      session[:cart][product_id] += 1
-      flash[:notice] = "#{@product.title} quantity updated in cart"
+    quantity = params[:quantity].to_i
+
+    if quantity > 0
+      session[:cart][product_id] ||= 0
+      session[:cart][product_id] += quantity
+      flash[:notice] = "#{quantity} more #{@product.title} have been added to cart"
     else
-      session[:cart][product_id] = 1
-      flash[:notice] = "#{@product.title} added to cart"
+      flash[:notice] = "Specify a quantity for #{@product.title}"
     end
     redirect_to product_path(@product)
   end
+
+
 
   def destroy
     product_id = @product.id.to_s
@@ -41,5 +45,6 @@ class CartController < ApplicationController
 
   def get_product
     @product = Product.find(params[:product_id] || params[:id])
+    @quantity = params[:quantity].to_i
   end
 end
