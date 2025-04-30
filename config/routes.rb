@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "checkout/create"
+  get "checkout/success"
+  get "checkout/cancel"
   get "cart/create"
   get "cart/destroy"
   resources :cart, only: [ :create, :destroy, :index ]
@@ -7,6 +10,13 @@ Rails.application.routes.draw do
   get "products/show"
   get "search", to: "products#search", as: "search_products"
   get "about", to: "products#about", as: "about"
+
+  scope "/checkout" do
+    post "create", to: "checkout#create", as: "checkout_create"
+    get "success", to: "checkout#success", as: "checkout_success"
+    get "cancel", to: "checkout#cancel", as: "checkout_cancel"
+  end
+
   # get "categories", to: "categories#show", as: "categories"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users

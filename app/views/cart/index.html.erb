@@ -20,6 +20,10 @@
         Ready to checkout <%= current_user.first_name%>?
       </h1>
       <p class="lead">Please remember all purchases are final. We're happy you decided to give us your money! Please come back and give us more anytime.</p>
+      <%= form_with url: checkout_create_path, method: :post do %>
+        <%= hidden_field_tag :cart, @cart_items %>
+        <%= submit_tag "Checkout", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
