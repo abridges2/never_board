@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "checkout/create"
-  get "checkout/success"
-  get "checkout/cancel"
   get "cart/create"
   get "cart/destroy"
   resources :cart, only: [ :create, :destroy, :index ]
