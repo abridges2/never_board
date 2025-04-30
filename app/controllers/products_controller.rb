@@ -16,12 +16,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-
-    session[:viewed_products] ||= {}
-    session[:viewed_products][@product.id.to_s] ||= 0
-    session[:viewed_products][@product.id.to_s] += 1
-
-    flash.now[:notice] = "You have viewed this product #{session[:viewed_products][@product.id.to_s]} times."
   end
 
   def search
@@ -45,21 +39,6 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @featured_products = Product.where(featured: true).limit(5)
     @random_products = Product.order("RANDOM()").limit(3)
-    # @latest_products = Product.order(created_at: :desc).limit(5)
-    # @popular_products = Product.order(purchases_count: :desc).limit(5)
-    # @discounted_products = Product.where("discount > 0").limit(5)
     @on_sale_products = Product.where("sale_price < price").limit(5)
-    # @new_arrivals = Product.order(created_at: :desc).limit(5)
-    # @top_rated_products = Product.where("rating >= ?", 4).limit(5)
-    # @best_selling_products = Product.order(sales_count: :desc).limit(5)
-    # @trending_products = Product.where("trending = ?", true).limit(5)
-    # @seasonal_products = Product.where("seasonal = ?", true).limit(5)
-    # @limited_edition_products = Product.where("limited_edition = ?", true).limit(5)
-    # @clearance_products = Product.where("clearance = ?", true).limit(5)
-    # @eco_friendly_products = Product.where("eco_friendly = ?", true).limit(5)
-    # @handmade_products = Product.where("handmade = ?", true).limit(5)
-    # @locally_sourced_products = Product.where("locally_sourced = ?", true).limit(5)
-    # @artisan_products = Product.where("artisan = ?", true).limit(5)
-    # @customizable_products = Product.where("customizable = ?", true).limit(5)
   end
 end
