@@ -2,15 +2,28 @@ class CheckoutController < ApplicationController
   def create
     @cart = session[:cart]
     @cart_items = []
+
+    province = current_user.province
+    gst = province.gst
+    pst = province.pst
+    hst = province.hst
+    total_tax_rate = gst + pst + hst
+
     @cart.each do |product_id, quantity|
       product = Product.find(product_id)
+
+      base_price = product.price_cents
+      tax_amount = (base_price * total_tax_rate).round
+
       @cart_items << {
         id: product.id.to_s,
         title: product.title,
         quantity: quantity,
         description: product.description,
         image: product.image,
-        price: product.price_cents
+        base_price: base_price,
+        tax_amount: tax_amount,
+        total_price: base_price + tax_amount
       }
     end
 
@@ -22,7 +35,7 @@ class CheckoutController < ApplicationController
             name: item[:title],
             description: item[:description]
           },
-          unit_amount: item[:price]
+          unit_amount: item[:total_price]
         },
         quantity: item[:quantity]
       }
