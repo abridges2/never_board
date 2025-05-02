@@ -1,29 +1,43 @@
-<div class="container py-5">
- <div class="homepage-section text-center">
-    <h1 class="display-4">
-      Welcome to Never-Board
-      <% if user_signed_in? %>
-        <%=current_user.first_name %>!
-      <% end %>
-    </h1>
-    <p class="lead">Your go-to store for the best tabletop games and accessories.</p>
-    <%= link_to "Browse Products", products_path, class: "btn btn-light btn-lg cart-button cart-btn"%>
-
-    <h2 class="display-4 mt-3">Featured Products</h2>
-    <p class="lead">Some games we think you'll love!</p>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
-      <% @random_products.each do |product| %>
-        <%= render partial: "product_card", locals: { product: product } %>
-      <% end %>
+<div class="container bg-dark text-white py-3 mt-5 mb-5 rounded shadow border-0">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center mt-2">
+      <h1 class="display-4">
+        Welcome to Never-Board
+        <% if user_signed_in? %>
+          <%=current_user.first_name %>!
+        <% end %>
+      </h1>
     </div>
 
-    <h2 class="display-4 mt-3">About Never-Board</h2>
-    <p class="lead">
-      At Never-Board, we're passionate about connecting people through the joy of tabletop gaming. Explore our wide selection of board games, card games,
-      and accessories that cater to all ages and interests. Whether you're a seasoned gamer or just starting out, we have something for everyone.
-      <%= link_to "Read more...", about_path, class: "text-white cart-button cart-btn"%>
-    </p>
+  <div class="row">
+    <div class="col-12 text-center">
+      <p class="lead fs-3">Your go-to store for the best tabletop games and accessories.</p>
+    </div>
+  </div>
 
+    <div class="col-10 col-md-8 text-center border-bottom border-secondary mb-4">
+        <p class="lead">
+          At Never-Board, we're passionate about connecting people through the joy of tabletop gaming. Explore our wide selection of board games, card games,
+          and accessories that cater to all ages and interests. Whether you're a seasoned gamer or just starting out, we have something for everyone.
+          <%= link_to "Read more...", about_path, class: "text-white cart-button cart-btn"%>
+        </p>
+    </div>
 
+    <div class="col-12 text-center mb-4">
+      <%= link_to "Browse Products", products_path, class: "btn btn-light btn-lg cart-button cart-btn"%>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-10 text-center border-bottom border-secondary mb-4">
+      <h2 class="display-4 mt-3">Featured Products</h2>
+      <p class="lead">Some games we think you'll love!</p>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+    <% @random_products.each do |product| %>
+      <%= render partial: "product_card", locals: { product: product } %>
+    <% end %>
   </div>
 </div>
