@@ -1,4 +1,4 @@
-<div class="container bg-dark text-white py-3 mt-5 mb-5 rounded shadow border-0">
+<div class="container bg-dark text-white py-3 mt-5 mb-5 rounded shadow border border-secondary">
   <div class="row justify-content-center">
     <div class="col-12 text-center mt-2">
       <h1 class="display-4">
@@ -22,22 +22,29 @@
           <%= link_to "Read more...", about_path, class: "text-white cart-button cart-btn"%>
         </p>
     </div>
-
-    <div class="col-12 text-center mb-4">
-      <%= link_to "Browse Products", products_path, class: "btn btn-light btn-lg cart-button cart-btn"%>
-    </div>
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-10 text-center border-bottom border-secondary mb-4">
+    <div class="col-10 text-center border-bottom border-secondary mb-0">
       <h2 class="display-4 mt-3">Featured Products</h2>
       <p class="lead">Some games we think you'll love!</p>
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
     <% @random_products.each do |product| %>
       <%= render partial: "product_card", locals: { product: product } %>
     <% end %>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12 text-center mt-4 mb-4 border-bottom border-secondary">
+      <h2 class="display-4 mt-3">Browse our other products</h2>
+      <p class="lead">Check out our wonderful collection of games!</p>
+      <div class="col 12 text-center mt-4 mb-4 border-top border-secondary pt-3">
+        <%= link_to "Browse Products", products_path, class: "btn btn-light btn-lg cart-button cart-btn"%>
+      </div>
+    </div>
   </div>
 </div>

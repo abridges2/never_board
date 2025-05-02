@@ -1,10 +1,10 @@
-<div class="container bg-dark p-4 my-5 rounded shadow border-0">
+<div class="container bg-dark p-4 my-5 rounded shadow border border-secondary">
   <div class="card shadow-lg border-0">
     <div class="row g-0">
 
       <% if @product.image.attached? %>
         <div class="col-md-6">
-          <%= image_tag @product.image.variant(resize_to_limit: [800, 600]).processed, class: "img-fluid rounded-start", alt: @product.title %>
+          <%= image_tag @product.image.variant(resize_to_limit: [1200, 800]).processed, class: "img-fluid rounded-start", alt: @product.title %>
         </div>
       <% end %>
 
