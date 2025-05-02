@@ -4,7 +4,7 @@
 
       <% if @product.image.attached? %>
         <div class="col-md-6">
-          <%= image_tag url_for(@product.image), class: "img-fluid rounded-start", alt: @product.title %>
+          <%= image_tag @product.image.variant(resize_to_limit: [800, 600]).processed, class: "img-fluid rounded-start", alt: @product.title %>
         </div>
       <% end %>
 
