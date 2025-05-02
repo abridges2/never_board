@@ -14,7 +14,7 @@
               Tax per unit: $<%= '%.2f' % (item[:tax_amount] / 100.0) %><br>
               Total per unit: $<%= '%.2f' % (item[:total_price] / 100.0) %>
             </p>
-            <%= button_to "Remove from Cart", cart_path(item[:id]), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "Remove from Cart", cart_path(item[:id]), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
           </div>
         <% end %>
         <div class="card-footer">

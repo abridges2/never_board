@@ -1,34 +1,36 @@
 <div class="container bg-dark p-5 rounded shadow-sm mt-5 mb-5 border border-secondary">
  <div class="row align-items-center justify-content-between mb-3">
-  <div class="col-auto">
-    <h2 class="text-light mb-4 display-4">
-      <% if @query.present? || @category_id.present? %>
-        Search Results
-      <% elsif @filter.present?%>
-        <%= @filter.titleize %> Products
-      <% else %>
-        All Products
+    <div class="col-auto">
+      <h2 class="text-light mb-4 display-4">
+        <% if @query.present? || @category_id.present? %>
+          Search Results
+        <% elsif @filter.present?%>
+          <%= @filter.titleize %> Products
+        <% else %>
+          All Products
+        <% end %>
+      </h2>
+    </div>
+
+    <div class="col-auto">
+      <%= paginate @products %>
+    </div>
+
+    <div class="col-auto">
+      <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
+        <label for="form-select" class="text-light me-2">Filters:</label>
+        <select class="form-select" name="filter" id="form-select" onchange="this.form.submit();">
+          <option value="">None</option>
+          <option value="on_sale" <%= "selected" if @filter == "on_sale" %>>On Sale</option>
+          <option value="new" <%= "selected" if @filter == "new" %>>New</option>
+          <option value="recently_updated" <%= "selected" if @filter == "recently_updated" %>>Recently Updated</option>
+        </select>
       <% end %>
-    </h2>
-  </div>
+    </div>
 
-  <div class="col-auto">
-    <%= paginate @products %>
-  </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <%= render partial: "product_card", collection: @products, as: :product %>
+    </div>
 
-  <div class="col-auto">
-    <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
-      <label for="form-select" class="text-light me-2">Filters:</label>
-      <select class="form-select" name="filter" id="form-select" onchange="this.form.submit();">
-        <option value="">None</option>
-        <option value="on_sale" <%= "selected" if @filter == "on_sale" %>>On Sale</option>
-        <option value="new" <%= "selected" if @filter == "new" %>>New</option>
-        <option value="recently_updated" <%= "selected" if @filter == "recently_updated" %>>Recently Updated</option>
-      </select>
-    <% end %>
-  </div>
-
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <%= render partial: "product_card", collection: @products, as: :product %>
   </div>
 </div>
