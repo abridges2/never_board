@@ -26,12 +26,11 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark py-4 border-bottom shadow-sm">
-      <div class="container-fluid">
+      <div class="container">
         <!-- Navbar brand -->
-        <%= link_to image_tag("https://fontmeme.com/permalink/250411/babd8beff0b750d37e6ab75168aec56e.png", alt: "resize-images", border: 0), root_path %>
+        <%= link_to image_tag("https://fontmeme.com/permalink/250411/babd8beff0b750d37e6ab75168aec56e.png", alt: "Never Board", border: 0), root_path %>
 
-
-        <!-- Toggle for mobile -->
+        <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -42,73 +41,56 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link fs-5"%>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link fs-5" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fs-5" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Products", products_path, class: "nav-link fs-5"%>
-            </li>
+            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link fs-5" %></li>
+            <li class="nav-item"><a class="nav-link fs-5" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link fs-5" href="#">Contact</a></li>
+            <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link fs-5" %></li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fs-5" href="#" id="categoryDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Categories
-              </a>
+              <a class="nav-link dropdown-toggle fs-5" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
               <ul class="dropdown-menu bg-dark" aria-labelledby="categoryDropdown">
                 <% Category.all.each do |category| %>
-                  <li>
-                    <%= link_to category.name, category_path(category), class: "dropdown-item" %>
-                  </li>
+                  <li><%= link_to category.name, category_path(category), class: "dropdown-item" %></li>
                 <% end %>
               </ul>
             </li>
-
-              <%# <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <aclass="dropdown-item" href="#">Another</a>
-                <div class="dropdown-divider"></div>
-                <aclass="dropdown-item" href="#">Something else</a> %>
-              </div>
-            </li>
           </ul>
 
-          <!-- Cart and Search (right side) -->
-          <div class="d-flex align-items-center gap-3">
+          <!-- Right side (buttons + search form) -->
+          <div class="d-flex flex-column flex-lg-row gap-2 align-items-lg-center">
             <% if user_signed_in? %>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm me-3 cart-btn"%>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm cart-btn" %>
             <% else %>
-              <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-light me-3 cart-btn"%>
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light btn-sm me-3" %>
+              <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-light btn-sm cart-btn" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light btn-sm cart-btn" %>
             <% end %>
 
-            <%= link_to cart_index_path, class: "btn btn-outline-light me-3 cart-btn" do %>
+            <%= link_to cart_index_path, class: "btn btn-outline-light btn-sm cart-btn" do %>
               <i class="bi bi-cart3"></i>
             <% end %>
 
-            <%= form_with(url: search_products_path, method: "get", local: true, html: { class: "d-flex gap-2 form-inline"}) do %>
-              <%= text_field_tag(:query, nil, class: "form-control rounded", placeholder: "Search product") %>
-              <select class="form-select" name="category_id" id="form-select">
-                <option value="">All categories</option>
-                <% Category.all.each do |category| %>
-                  <option value="<%= category.id %>"><%= category.name %></option>
-                <% end %>
-              </select>
-              <% submit_tag("Search") %>
-            <% end %>
+
           </div>
         </div>
       </div>
     </nav>
-    <!-- Navbar -->
+    <!-- End Navbar -->
 
+    <!-- Search Section -->
+    <div class="bg-dark border-bottom border-secondary py-3">
+      <div class="container">
+        <%= form_with(url: search_products_path, method: "get", local: true, html: { class: "d-flex flex-wrap gap-2 justify-content-center" }) do %>
+          <%= text_field_tag(:query, nil, class: "form-control w-auto", placeholder: "Search product") %>
+          <select class="form-select w-auto" name="category_id" id="form-select">
+            <option value="">All categories</option>
+            <% Category.all.each do |category| %>
+              <option value="<%= category.id %>"><%= category.name %></option>
+            <% end %>
+          </select>
+          <%= submit_tag("Search", class: "btn btn-light") %>
+        <% end %>
+      </div>
+    </div>
+    <!-- End Search Section -->
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

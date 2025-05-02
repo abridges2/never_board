@@ -53,8 +53,77 @@ class CheckoutController < ApplicationController
   end
 
   def success
+    if session[:cart].blank?
+      flash[:notice] = "Your order could not be completed. Please try again."
+      return redirect_to products_path
+    else
+      cart = session[:cart]
+      user = current_user
+      province = user.province
+      gst_rate = province.gst || 0
+      pst_rate = province.pst || 0
+      hst_rate = province.hst || 0
+      tax_rate = gst_rate + pst_rate + hst_rate
+
+      subtotal_cents = 0
+      gst_cents = 0
+      pst_cents = 0
+      hst_cents = 0
+
+      # Create the order
+      order = Order.create!(
+        user: user,
+        province: province,
+        address: user.address,
+        gst_cents: 0,
+        pst_cents: 0,
+        hst_cents: 0,
+        subtotal_cents: 0,
+        total_cents: 0
+      )
+
+      # Create monetary values for the order
+      cart.each do |product_id, quantity|
+        product = Product.find(product_id)
+        base_price = product.price_cents
+
+        # Subtotal of order without tax
+        cart_item_subtotal = base_price * quantity
+        subtotal_cents += cart_item_subtotal
+
+        # Individual item tax calculations
+        gst_cents += (cart_item_subtotal * gst_rate).round
+        pst_cents += (cart_item_subtotal * pst_rate).round
+        hst_cents += (cart_item_subtotal * hst_rate).round
+
+        # Create the order item
+        OrderItem.create!(
+          order: order,
+          product: product,
+          quantity: quantity,
+          price_cents: base_price,
+          total_cents: (cart_item_subtotal * (1 + tax_rate)).round
+        )
+      end
+
+      total_cents = subtotal_cents + gst_cents + pst_cents + hst_cents
+
+      # Update the order with the calculated values
+      order.update!(
+        subtotal_cents: subtotal_cents,
+        gst_cents: gst_cents,
+        pst_cents: pst_cents,
+        hst_cents: hst_cents,
+        total_cents: total_cents
+      )
+    end
+
+    session[:cart] = nil
+    flash[:alert] = "Your order has been completed & saved successfully."
   end
 
   def cancel
+    flash[:alert] = "Your checkout has been cancelled."
+    redirect_to cart_index_path
   end
 end

@@ -30,9 +30,10 @@ class CartController < ApplicationController
   def index
     @cart = session[:cart]
     @cart_items = []
+    @total_order_price = 0
 
     # Get user's province and tax rates
-    province = current_user.province
+    province = Province.find(current_user.province_id)
     gst = province.gst || 0
     pst = province.pst || 0
     hst = province.hst || 0
@@ -43,6 +44,7 @@ class CartController < ApplicationController
       base_price = product.price_cents
       tax_amount = (base_price * total_tax_rate).round
       total_price = base_price + tax_amount
+      @total_order_price += total_price * quantity
 
       @cart_items << {
         id: product.id.to_s,
@@ -53,6 +55,7 @@ class CartController < ApplicationController
         base_price: base_price,
         tax_amount: tax_amount,
         total_price: total_price
+        # total_order_price: total_price * quantity
       }
     end
   end

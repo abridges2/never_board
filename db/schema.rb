@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_25_091100) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_000500) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -106,6 +106,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_091100) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_cents"
+    t.integer "total_cents"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -113,13 +115,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_091100) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "status"
-    t.float "subtotal"
-    t.float "total"
-    t.float "gst"
-    t.float "pst"
-    t.float "hst"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.integer "province_id"
+    t.integer "subtotal_cents", default: 0
+    t.integer "total_cents", default: 0
+    t.integer "gst_cents", default: 0
+    t.integer "pst_cents", default: 0
+    t.integer "hst_cents", default: 0
+    t.index ["province_id"], name: "index_orders_on_province_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -171,6 +176,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_091100) do
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "provinces"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "users", "provinces"
