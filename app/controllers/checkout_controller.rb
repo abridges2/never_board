@@ -119,11 +119,16 @@ class CheckoutController < ApplicationController
     end
 
     session[:cart] = nil
-    flash[:alert] = "Your order has been completed & saved successfully."
+    flash[:notice] = "Your order has been completed & saved successfully."
+    redirect_to checkout_thank_you_path
   end
 
   def cancel
     flash[:alert] = "Your checkout has been cancelled."
     redirect_to cart_index_path
+  end
+
+  def thank_you
+    render "thank_you"
   end
 end

@@ -92,8 +92,9 @@
     </div>
     <!-- End Search Section -->
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <!-- Flash Messages -->
+    <%= render 'shared/flash' %>
+
     <%= yield %>
 
     <%# Bootstrap 5.3.3 JS Bundle CDN %>

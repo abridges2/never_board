@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post "create", to: "checkout#create", as: "checkout_create"
     get "success", to: "checkout#success", as: "checkout_success"
     get "cancel", to: "checkout#cancel", as: "checkout_cancel"
+    get "checkout/thank_you", to: "checkout#thank_you", as: :checkout_thank_you
   end
 
   # get "categories", to: "categories#show", as: "categories"
